@@ -1,6 +1,6 @@
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
 
-# NodeJS with HapiJS Messaging RESTful API
+# NodeJS & HapiJS Messaging RESTful API
 
 Was created with love using `NodeJS v` and `HapiJS v`
 
