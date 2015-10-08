@@ -2,7 +2,7 @@
 
 # NodeJS & HapiJS Messaging RESTful API
 
-Was created with love using `NodeJS v` and `HapiJS v`
+Was created with love using `NodeJS v4.1.2`, `Npm v2.14.6` and `HapiJS v`
 
 The API allows to perform the following operations:
 

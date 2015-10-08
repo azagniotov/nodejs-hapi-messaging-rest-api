@@ -1,0 +1,18 @@
+{
+  "name": "nodejs-hapi-messaging-rest-api",
+  "version": "1.0.0",
+  "description": "NodeJS with HapiJS Messaging RESTful API",
+  "author": "Alexander Zagniotov <azagniotov@gmail.com>",
+  "bin": {
+    "module-name": "./bin/module-name"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azagniotov/nodejs-hapi-messaging-rest-api"
+  },
+  "bugs": {
+    "url": "https://github.com/azagniotov/nodejs-hapi-messaging-rest-api/issues"
+  },
+  "license": "MIT"
+}
