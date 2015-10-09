@@ -7,7 +7,7 @@
 
 Was created with love using `NodeJS v4.1.2`, `Npm v2.14.6` and `HapiJS v10.4.1`
 
-The API allows to perform the following operations:
+The API allows to perform the following operations :
 
 1. Create and list users
 2. Create new conversations with users
