@@ -11,8 +11,8 @@
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js",
     "test": "npm run unit && npm run integration",
-    "unit": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --color --growl --captureExceptions spec/unit",
-    "integration": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --color --growl --captureExceptions spec/integration"
+    "unit": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --color --growl --captureExceptions test/unit",
+    "integration": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --color --growl --captureExceptions test/integration"
   },
   "bugs": {
     "url": "https://github.com/azagniotov/nodejs-hapi-messaging-rest-api/issues"
