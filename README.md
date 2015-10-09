@@ -1,9 +1,10 @@
 [![Code Climate](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api/badges/gpa.svg)](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api)
+[![Test Coverage](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api/badges/coverage.svg)](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api/coverage)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
 
 # NodeJS & HapiJS Messaging RESTful API
 
-Was created with love using `NodeJS v4.1.2`, `Npm v2.14.6` and `HapiJS v`
+Was created with love using `NodeJS v4.1.2`, `Npm v2.14.6` and `HapiJS v10.4.1`
 
 The API allows to perform the following operations:
 
