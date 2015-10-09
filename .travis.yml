@@ -13,11 +13,6 @@ cache:
   directories:
     - node_modules
 
-install:
-  - npm install -g istanbul
-  - npm install -g codeclimate-test-reporter
-  - npm install
-
 script:
   - npm test
 

@@ -20,8 +20,9 @@
     "hapi": "^10.4.1"
   },
   "devDependencies": {
+    "codeclimate-test-reporter": "^0.1.1",
+    "istanbul": "^0.3.22",
     "jasmine-node": "^1.14.5",
-    "nodemon": "^1.7.1",
-    "istanbul": "^0.3.22"
+    "nodemon": "^1.7.1"
   }
 }
