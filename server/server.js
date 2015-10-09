@@ -1,5 +1,5 @@
 var Hapi = require("hapi");
-var data = require("../spec/fixtures/unit/data");
+var data = require("../spec/fixtures/data");
 function createServer(port) {
     var server = new Hapi.Server();
     server.connection({

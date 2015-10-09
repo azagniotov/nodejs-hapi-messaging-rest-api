@@ -10,9 +10,7 @@
   },
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js",
-    "test": "npm run unit && npm run integration",
-    "unit": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node spec/unit --color --growl --captureExceptions",
-    "integration": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node spec/integration --color --growl --captureExceptions"
+    "test": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node spec --color --growl --captureExceptions"
   },
   "bugs": {
     "url": "https://github.com/azagniotov/nodejs-hapi-messaging-rest-api/issues"

@@ -1,5 +1,5 @@
-var server = require("../../server/server").createServer(3000);
-var data = require("./../fixtures/unit/data");
+var server = require("../server/server").createServer(3000);
+var data = require("./fixtures/data");
 describe("get Data", function () {
     it("responds with data object", function (done) {
         var options = {method: "GET", url: "/data/1"};
