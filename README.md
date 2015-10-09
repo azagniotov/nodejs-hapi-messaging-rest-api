@@ -1,3 +1,4 @@
+[![Code Climate](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api/badges/gpa.svg)](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
 
 # NodeJS & HapiJS Messaging RESTful API

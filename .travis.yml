@@ -1,0 +1,31 @@
+language: node_js
+
+node_js:
+  - "4.1.2"
+
+env:
+  global:
+    - CODECLIMATE_REPO_TOKEN=56644d94f6732b66eed159e0ba710bd30738a055bbc7e3e06f077b149d734583
+
+sudo: false
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install -g istanbul
+  - npm install -g codeclimate-test-reporter
+  - npm install
+
+script:
+  - npm test
+
+addons:
+  code_climate:
+    repo_token: 56644d94f6732b66eed159e0ba710bd30738a055bbc7e3e06f077b149d734583
+
+after_script:
+  - codeclimate-test-reporter < lcov.info
+
+
