@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/azagniotov/nodejs-hapi-messaging-rest-api.svg?branch=master)](https://travis-ci.org/azagniotov/nodejs-hapi-messaging-rest-api)
-[![Codacy Badge](https://api.codacy.com/project/badge/e4e6f85effa04516b7a471a79e307207)](https://www.codacy.com/app/azagniotov/nodejs-hapi-messaging-rest-api)
 [![Code Climate](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api/badges/gpa.svg)](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api)
 [![Test Coverage](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api/badges/coverage.svg)](https://codeclimate.com/github/azagniotov/nodejs-hapi-messaging-rest-api/coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/e4e6f85effa04516b7a471a79e307207)](https://www.codacy.com/app/azagniotov/nodejs-hapi-messaging-rest-api)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
 
 # NodeJS & HapiJS Messaging RESTful API
