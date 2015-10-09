@@ -1,5 +1,4 @@
 var server = require("../../server/server").listen(3000);
-var data = require("./../fixtures/data");
 
 describe("get Data", function () {
     it("responds with data object", function (done) {
