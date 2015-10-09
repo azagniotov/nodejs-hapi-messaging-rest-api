@@ -1,6 +1,7 @@
 var Hapi = require("hapi");
 var data = require("../spec/fixtures/data");
-function createServer(port) {
+
+function listen(port) {
     var server = new Hapi.Server();
     server.connection({
         host: 'localhost',
@@ -25,4 +26,4 @@ function createServer(port) {
     server.route([healthCheck, getData]);
     return server;
 }
-module.exports = {createServer: createServer};
+module.exports = {listen: listen};
