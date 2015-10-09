@@ -31,7 +31,7 @@ pids
 *.pid
 *.seed
 
-coverage/lcov-report
+coverage
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
