@@ -1,4 +1,4 @@
-var server = require("../../src/server/Server").listen(3000);
+var server = require("../../src/server/Server.js").listen(3000);
 
 describe("get Data", function () {
     it("responds with data object", function (done) {

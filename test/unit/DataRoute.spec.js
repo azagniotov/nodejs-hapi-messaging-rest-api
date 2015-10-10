@@ -1,4 +1,4 @@
-var server = require("../../src/server/Server").listen(3000);
+var server = require("../../src/server/Server.js").listen(3000);
 
 describe("Data Endpoint", function() {
     var route = server.lookup('get_data_by_id');

@@ -1,6 +1,6 @@
 var Hapi = require("hapi");
-var rootRoute = require("../routes/RootRoute");
-var dataRoute = require("../routes/api/v1/DataRoute");
+var rootRoute = require("../routes/RootRoute.js");
+var dataRoute = require("../routes/api/v1/DataRoute.js");
 
 function listen(port) {
     var server = new Hapi.Server();
