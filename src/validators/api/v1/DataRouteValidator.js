@@ -1,6 +1,6 @@
 var Joi = require('joi');
 
-var DataRouteValidator = function DataRouteValidator() {
+function DataRouteValidator() {
 };
 
 DataRouteValidator.prototype = {

@@ -1,6 +1,6 @@
 var data = require("../../../db/fixtures/data");
 
-var DataController = function DataController() {
+function DataController() {
 };
 
 DataController.prototype = {
