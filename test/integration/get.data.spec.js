@@ -13,8 +13,11 @@ describe("get Data", function () {
     it("responds with 404 - Not Found", function (done) {
         var options = {method: "GET", url: "/data/two"};
         server.inject(options, function (response) {
-            expect(response.statusCode).toBe(404);
-            expect(response.result).toBe("Not Found");
+            expect(response.statusCode).toBe(400);
+
+            var error = JSON.parse(response.payload);
+            expect(error.statusCode).toBe(400);
+            expect(error.error).toBe("Bad Request");
             done();
         });
     });
