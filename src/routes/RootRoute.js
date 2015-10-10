@@ -1,3 +1,5 @@
+var rootController = require("../controllers/RootController.js");
+
 var rootRoute = {
     path: '/',
     method: 'GET',
@@ -5,9 +7,7 @@ var rootRoute = {
         id: 'root',
         description: 'Returns hello world',
         notes: 'Just a sanity check method',
-        handler: function (request, reply) {
-            reply('hello world');
-        }
+        handler: rootController.apiDiscovery
     }
 };
 
