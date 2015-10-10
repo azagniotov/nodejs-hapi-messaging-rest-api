@@ -5,8 +5,7 @@ var rootRoute = {
     method: 'GET',
     config: {
         id: 'root',
-        description: 'Returns hello world',
-        notes: 'Just a sanity check method',
+        description: 'Gets all of the endpoint categories that the API supports',
         handler: rootController.apiDiscovery
     }
 };

@@ -16,6 +16,6 @@ describe("Root Endpoint", function() {
     });
 
     it("should have expected description", function() {
-        expect(route.settings.description).toBe('Returns hello world');
+        expect(route.settings.description).toBe('Gets all of the endpoint categories that the API supports');
     });
 });
