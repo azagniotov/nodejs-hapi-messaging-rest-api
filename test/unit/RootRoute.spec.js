@@ -1,4 +1,4 @@
-var server = require("../../server/server").listen(3000);
+var server = require("../../src/server/Server").listen(3000);
 
 describe("Root Endpoint", function() {
     var route = server.lookup('root');

@@ -1,8 +1,8 @@
-var server = require("../../server/server").listen(3000);
+var server = require("../../src/server/Server").listen(3000);
 
 describe("get Data", function () {
     it("responds with data object", function (done) {
-        var options = {method: "GET", url: "/data/1"};
+        var options = {method: "GET", url: "/api/v1/data/1"};
         server.inject(options, function (response) {
             expect(response.statusCode).toBe(200);
             expect(response.result).toEqual({ message : 'world' });
@@ -11,7 +11,7 @@ describe("get Data", function () {
     });
 
     it("responds with 404 - Not Found", function (done) {
-        var options = {method: "GET", url: "/data/2"};
+        var options = {method: "GET", url: "/api/v1/data/2"};
         server.inject(options, function (response) {
             expect(response.statusCode).toBe(404);
             expect(response.result).toBe("Not Found");
@@ -20,7 +20,7 @@ describe("get Data", function () {
     });
 
     it("responds with Bad Request when param is invalid", function (done) {
-        var options = {method: "GET", url: "/data/two"};
+        var options = {method: "GET", url: "/api/v1/data/two"};
         server.inject(options, function (response) {
             expect(response.statusCode).toBe(400);
 

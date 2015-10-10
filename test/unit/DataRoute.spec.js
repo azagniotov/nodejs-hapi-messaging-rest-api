@@ -1,4 +1,4 @@
-var server = require("../../server/server").listen(3000);
+var server = require("../../src/server/Server").listen(3000);
 
 describe("Data Endpoint", function() {
     var route = server.lookup('get_data_by_id');
@@ -8,7 +8,7 @@ describe("Data Endpoint", function() {
     });
 
     it("should have expected path", function() {
-        expect(route.path).toBe('/data/{index}');
+        expect(route.path).toBe('/api/v1/data/{id}');
     });
 
     it("should have expected method", function() {

@@ -1,6 +1,6 @@
 var Hapi = require("hapi");
-var data = require("../db/fixtures/data");
-var routes = require("./routes");
+var rootRoute = require("../routes/RootRoute");
+var dataRoute = require("../routes/api/v1/DataRoute");
 
 function listen(port) {
     var server = new Hapi.Server();
@@ -9,7 +9,7 @@ function listen(port) {
         port: port
     });
 
-    server.route(routes);
+    server.route([rootRoute, dataRoute]);
     return server;
 }
 module.exports = {listen: listen};
