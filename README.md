@@ -36,6 +36,8 @@ The API allows to perform the following operations :
 
 ### Running
 
+1. To run the app locally run `npm install` followed by `npm start`
+2. To run the tests run `npm test`
 
 ### Current Version
 
