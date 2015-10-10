@@ -11,6 +11,15 @@ describe("get Data", function () {
     });
 
     it("responds with 404 - Not Found", function (done) {
+        var options = {method: "GET", url: "/data/2"};
+        server.inject(options, function (response) {
+            expect(response.statusCode).toBe(404);
+            expect(response.result).toBe("Not Found");
+            done();
+        });
+    });
+
+    it("responds with Bad Request when param is invalid", function (done) {
         var options = {method: "GET", url: "/data/two"};
         server.inject(options, function (response) {
             expect(response.statusCode).toBe(400);
