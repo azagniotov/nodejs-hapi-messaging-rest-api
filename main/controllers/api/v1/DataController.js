@@ -1,4 +1,4 @@
-var data = require("../../../db/fixtures/data");
+var data = require(__main_root + 'db/fixtures/data');
 
 function DataController() {
 };

@@ -1,5 +1,5 @@
-var dataController = require("../../../controllers/api/v1/DataController.js");
-var dataRouteValidator = require("../../../validators/api/v1/DataRouteValidator.js");
+var dataController = require(__main_root + 'controllers/api/v1/DataController.js');
+var dataRouteValidator = require(__main_root + 'validators/api/v1/DataRouteValidator.js');
 
 var getData = {
     path: '/api/v1/data/{id}',

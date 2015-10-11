@@ -1,4 +1,4 @@
-var server = require("../../src/server/Server.js").listen(3000);
+var server = require('../test_helper').server;
 
 describe('Health Check', function () {
     it("responds with status code 200 and hello world text", function (done) {

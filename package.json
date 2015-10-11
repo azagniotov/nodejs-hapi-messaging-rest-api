@@ -4,9 +4,14 @@
   "description": "NodeJS with HapiJS Messaging RESTful API",
   "author": "Alexander Zagniotov <azagniotov@gmail.com>",
   "main": "app.js",
+  "private": "true",
   "repository": {
     "type": "git",
     "url": "https://github.com/azagniotov/nodejs-hapi-messaging-rest-api"
+  },
+  "config" : {
+    "port" : "3000",
+    "host" : "localhost"
   },
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js",

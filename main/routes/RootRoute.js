@@ -1,4 +1,4 @@
-var rootController = require("../controllers/RootController.js");
+var rootController = require(__main_root + 'controllers/RootController.js');
 
 var rootRoute = {
     path: '/',
