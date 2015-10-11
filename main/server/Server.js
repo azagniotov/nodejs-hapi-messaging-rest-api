@@ -3,7 +3,7 @@ function listen() {
     var rootRoute = require(__main_root + 'routes/RootRoute.js');
     var dataRoutes = require(__main_root + 'routes/api/v1/DataRoute.js');
     var userRoutes = require(__main_root + 'routes/api/v1/UserRoute.js');
-    
+
     var server = new Hapi.Server();
     server.connection({
         host: process.env.npm_package_config_host,

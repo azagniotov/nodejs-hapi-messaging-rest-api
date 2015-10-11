@@ -234,7 +234,7 @@ Response
 ##### List user by id
 
 ```
-GET /api/v1/users/:user_id
+GET /api/v1/users/{user_id}
 ```
 
 Request
@@ -274,7 +274,7 @@ Response
 ##### List user conversations by user id
 
 ```
-GET /api/v1/users/:user_id/conversations
+GET /api/v1/users/{user_id}/conversations
 ```
 
 Request
@@ -335,7 +335,7 @@ Response
 ##### Add a user to a conversation
 
 ```
-POST /api/v1/conversations/:conversation_id/users
+POST /api/v1/conversations/{conversation_id}/users
 ```
 Parameters
 
@@ -361,7 +361,7 @@ Response
 ##### Post a new message to a conversation
 
 ```
-POST /api/v1/conversations/:conversation_id/messages
+POST /api/v1/conversations/{conversation_id}/messages
 ```
 Parameters
 
@@ -408,7 +408,7 @@ Response
 ##### List conversations by id
 
 ```
-GET /api/v1/conversations/:conversation_id
+GET /api/v1/conversations/{conversation_id}
 ```
 
 Request
@@ -429,7 +429,7 @@ Response
 ##### List conversation messages by conversation id
 
 ```
-GET /api/v1/conversations/:conversation_id/messages
+GET /api/v1/conversations/{conversation_id}/messages
 ```
 
 Request
@@ -450,7 +450,7 @@ Response
 ##### List conversation users by conversation id
 
 ```
-GET /api/v1/conversations/:conversation_id/users
+GET /api/v1/conversations/{conversation_id}/users
 ```
 
 Request
@@ -476,7 +476,7 @@ Response
 ##### List message by id
 
 ```
-GET /api/v1/messages/:message_id
+GET /api/v1/messages/{message_id}
 ```
 
 Request
