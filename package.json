@@ -26,7 +26,8 @@
   "dependencies": {
     "hapi": "^10.4.1",
     "joi": "^6.9.0",
-    "jsonapi-serializer": "^2.0.3"
+    "jsonapi-serializer": "^2.0.3",
+    "sqlite3": "^3.1.0"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.1.1",
