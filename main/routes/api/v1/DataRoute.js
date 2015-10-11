@@ -13,4 +13,4 @@ var getData = {
     }
 };
 
-module.exports = getData;
+module.exports = [getData];
