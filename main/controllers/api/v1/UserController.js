@@ -13,6 +13,12 @@ UserController.prototype = {
             password: payload.user.password
         }).then(function (user) {
             reply(userSerializer.serialize(user)).code(201);
+        }).catch(function (error) {
+            reply({
+                'code': 409,
+                'message': '409 Conflict',
+                'description': "User with email '" + payload.user.email + "' is already registered"
+            }).code(409);
         });
     },
     listUserById: function listUserById(request, reply) {

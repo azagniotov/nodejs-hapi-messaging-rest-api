@@ -16,6 +16,18 @@ UserRouteValidator.prototype = {
                     'email': Joi.string().required(),
                     'password': Joi.string().required()
                 })
+            },
+            failAction: function (request, reply, source, error) {
+
+                if (error.isBoom && error.output.statusCode == 400 && error.data.name === 'ValidationError') {
+                    error.output.statusCode = 422;
+                    error.output.payload = {
+                        "code": 422,
+                        "message": "422 Unprocessable Entity",
+                        "description": "The server was unable to process the Request payload: " + error.data.details[0].message
+                    };
+                    return reply(error);
+                }
             }
         }
     },

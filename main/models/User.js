@@ -8,7 +8,8 @@
             },
             email: {
                 type: Sequelize.STRING,
-                field: 'email'
+                field: 'email',
+                unique: true
             },
             password: {
                 type: Sequelize.STRING,

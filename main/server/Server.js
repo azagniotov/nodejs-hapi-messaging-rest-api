@@ -15,6 +15,18 @@ function listen(databaseHost) {
     server.route([rootRoute].concat(dataRoutes, userRoutes));
     module.exports.routingTable = server.table(process.env.npm_package_config_host)[0].table;
 
+    server.ext('onPreResponse', function (request, reply) {
+        var response = request.response;
+        if (response.isBoom && response.output.statusCode == 400 && response.data.name === 'SyntaxError') {
+            response.output.payload = {
+                "code": 400,
+                "message": "400 Bad Request",
+                "description": "The syntax of the request entity is incorrect"
+            };
+        }
+        return reply.continue();
+    });
+
     return server;
 }
 module.exports = {listen: listen};
