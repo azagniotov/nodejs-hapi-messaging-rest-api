@@ -1,7 +1,7 @@
 /* istanbul ignore next */
-(function () {
+function init(databaseHost) {
     var Sequelize = require('sequelize');
-    var db = new Sequelize('messaging', null, null, {
+    var db = new Sequelize(databaseHost, null, null, {
         host: 'localhost',
         dialect: 'sqlite',
         pool: {
@@ -10,10 +10,12 @@
             idle: 10000
         },
         // SQLite only 
-        storage: __main_root + 'db/nodejs-hapi-messaging-rest-api.sqlite3'
+        storage: __main_root + 'db/' + databaseHost + '.sqlite3'
     });
     global.__db = db;
 
     var User = require(__main_root + 'models/User.js');
     User.sync({force: false});
-})();
+}
+
+module.exports = {init: init};
