@@ -1,4 +1,4 @@
-var User = require(__main_root + 'models/User.js');
+var User = global.__models.User;
 var userSerializer = require(__main_root + 'serializers/UserSerializer.js');
 
 function UserController() {
@@ -14,11 +14,19 @@ UserController.prototype = {
         }).then(function (user) {
             reply(userSerializer.serialize(user)).code(201);
         }).catch(function (error) {
-            reply({
-                'code': 409,
-                'message': '409 Conflict',
-                'description': "User with email '" + payload.user.email + "' is already registered"
-            }).code(409);
+            if (error.name === 'SequelizeUniqueConstraintError') {
+                reply({
+                    'code': 409,
+                    'message': '409 Conflict',
+                    'description': "User with email '" + payload.user.email + "' is already registered"
+                }).code(409);
+            } else {
+                reply({
+                    'code': 500,
+                    'message': error.message,
+                    'description': error.errors
+                }).code(500);
+            }
         });
     },
     listUserById: function listUserById(request, reply) {

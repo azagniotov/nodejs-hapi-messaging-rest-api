@@ -27,6 +27,7 @@
     "hapi": "^10.4.1",
     "joi": "^6.9.0",
     "jsonapi-serializer": "^2.0.3",
+    "node-uuid": "^1.4.3",
     "sequelize": "^3.11.0",
     "sqlite3": "^3.1.0"
   },

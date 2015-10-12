@@ -1,23 +1,47 @@
 /* istanbul ignore next */
-(function () {
+function make(db) {
     var Sequelize = require('sequelize');
-    var User = __db.define('user', {
-            name: {
-                type: Sequelize.STRING,
-                field: 'name'
-            },
-            email: {
-                type: Sequelize.STRING,
-                field: 'email',
-                unique: true
-            },
-            password: {
-                type: Sequelize.STRING,
-                field: 'password'
-            }
+    var User = db.define('user', {
+        name: {
+            type: Sequelize.STRING,
+            field: 'name',
+            allowNull: false
         },
-        {
-            freezeTableName: true
-        });
-    module.exports = User;
-})();
+        email: {
+            type: Sequelize.STRING,
+            field: 'email',
+            unique: true,
+            allowNull: false
+        },
+        password: {
+            type: Sequelize.STRING,
+            field: 'password',
+            allowNull: false
+        },
+        salt: {
+            type: Sequelize.STRING,
+            field: 'salt'
+        },
+        authToken: {
+            type: Sequelize.STRING,
+            field: 'auth_token'
+        }
+    }, {
+        timestamps: true,
+        underscored: true,
+        freezeTableName: true,
+        indexes: [{
+            name: 'user_auth_token',
+            fields: ['auth_token']
+        }],
+        hooks: {
+            beforeCreate: function (user, options) {
+                var uuid = require('node-uuid');
+                user.authToken = uuid.v4().replace(/-/g, '');
+            }
+        }
+    });
+    return User;
+}
+
+module.exports = {make: make};
