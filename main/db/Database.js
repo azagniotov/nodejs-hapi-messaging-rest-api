@@ -9,12 +9,11 @@
             min: 0,
             idle: 10000
         },
-        // SQLite only
-        storage: ':memory:'
+        // SQLite only 
+        storage: __main_root + 'db/nodejs-hapi-messaging-rest-api.sqlite3'
     });
     global.__db = db;
 
     var User = require(__main_root + 'models/User.js');
-    User.sync({force: true}).then(function () {
-    });
+    User.sync({force: false});
 })();
