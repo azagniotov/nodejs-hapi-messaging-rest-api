@@ -6,7 +6,7 @@
 
 # NodeJS & HapiJS Messaging RESTful API
 
-Was created with love using `NodeJS v4.1.2`, `Npm v2.14.6` and `HapiJS v10.4.1`
+Was created with love using `NodeJS v4.1.2`, `HapiJS v10.4.1`, `SQLite3 v3.1.0` and `Sequelize v3.11.0`
 
 The API allows to perform the following operations :
 
