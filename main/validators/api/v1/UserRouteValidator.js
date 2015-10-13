@@ -19,7 +19,7 @@ UserRouteValidator.prototype = {
             },
             failAction: function (request, reply, source, error) {
 
-                if (error.isBoom && error.output.statusCode == 400 && error.data.name === 'ValidationError') {
+                if (error.isBoom && error.output.statusCode === 400 && error.data.name === 'ValidationError') {
                     error.output.statusCode = 422;
                     error.output.payload = {
                         "code": 422,

@@ -5,12 +5,7 @@ function UserSerializer() {
 
 UserSerializer.prototype = {
     serialize: function serialize(model) {
-        var toSerialize = {
-            id: model.id,
-            name: model.name,
-            email: model.email
-        };
-        return new JSONAPISerializer('users', toSerialize, {
+        return new JSONAPISerializer('users', model, {
             dataLinks: {
                 self: function (user) {
                     return '/api/v1/users/' + user.id

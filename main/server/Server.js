@@ -17,7 +17,7 @@ function listen(databaseHost) {
 
     server.ext('onPreResponse', function (request, reply) {
         var response = request.response;
-        if (response.isBoom && response.output.statusCode == 400 && response.data.name === 'SyntaxError') {
+        if (response.isBoom && response.output.statusCode === 400 && response.data.name === 'SyntaxError') {
             response.output.payload = {
                 "code": 400,
                 "message": "400 Bad Request",

@@ -12,7 +12,7 @@ UserController.prototype = {
             email: payload.user.email,
             password: payload.user.password
         }).then(function (user) {
-            reply(userSerializer.serialize(user)).code(201);
+            reply(userSerializer.serialize(user.get({plain: true}))).code(201);
         }).catch(function (error) {
             if (error.name === 'SequelizeUniqueConstraintError') {
                 reply({
