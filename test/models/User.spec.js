@@ -57,7 +57,7 @@ describe('user model', function () {
             password: rawPassword
         }).then(function (savedUser) {
             User.findOne({where: {email: savedUser.email}}).then(function (foundUser) {
-                var bcrypt = require('bcrypt');
+                var bcrypt = require('bcrypt-nodejs');
                 var authenticated = bcrypt.compareSync(rawPassword, foundUser.password);
 
                 expect(authenticated).to.be.true;

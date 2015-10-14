@@ -39,7 +39,7 @@ function make(db) {
                 var uuid = require('node-uuid');
                 user.authToken = uuid.v4().replace(/-/g, '');
 
-                var bcrypt = require('bcrypt');
+                var bcrypt = require('bcrypt-nodejs');
                 user.salt = bcrypt.genSaltSync(10);
                 user.password = bcrypt.hashSync(user.password, user.salt);
             }
