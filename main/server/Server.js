@@ -2,6 +2,7 @@ function listen() {
     var Hapi = require('hapi');
     var rootRoute = require(__main_root + 'routes/RootRoute.js');
     var userRoutes = require(__main_root + 'routes/api/v1/UserRoute.js');
+    var sessionsRoute = require(__main_root + 'routes/api/v1/SessionsRoute.js');
 
     var server = new Hapi.Server();
     server.connection({
@@ -22,6 +23,25 @@ function listen() {
             };
         }
         return reply.continue();
+    });
+
+    server.register(require('hapi-auth-basic'), function (error) {
+        server.auth.strategy('simple', 'basic', {
+            validateFunc: function (request, email, password, callback) {
+                var User = global.__models.User;
+                User.findOne({where: {email: email}}).then(function (foundUser) {
+
+                    if (!foundUser || foundUser == null) {
+                        callback(null, false);
+                    } else {
+                        var bcrypt = require('bcrypt-nodejs');
+                        var authenticated = bcrypt.compareSync(password, foundUser.password);
+                        callback(null, authenticated, {email: email, auth_token: foundUser.authToken}); // will invoke the handler
+                    }
+                });
+            }
+        });
+        server.route(sessionsRoute);
     });
 
     return server;

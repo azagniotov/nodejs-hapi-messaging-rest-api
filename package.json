@@ -27,6 +27,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "hapi": "^10.4.1",
+    "hapi-auth-basic": "^3.0.0",
     "joi": "^6.9.0",
     "jsonapi-serializer": "^2.0.3",
     "node-uuid": "^1.4.3",

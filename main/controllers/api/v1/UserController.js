@@ -2,7 +2,7 @@ var User = global.__models.User;
 var userSerializer = require(__main_root + 'serializers/UserSerializer.js');
 
 function UserController() {
-};
+}
 
 UserController.prototype = {
     createNewUser: function createNewUser(request, reply) {

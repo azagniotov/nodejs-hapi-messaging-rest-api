@@ -1,7 +1,7 @@
 var JSONAPISerializer = require('jsonapi-serializer');
 
 function UserSerializer() {
-};
+}
 
 UserSerializer.prototype = {
     serialize: function serialize(model) {

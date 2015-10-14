@@ -149,7 +149,7 @@ describe('controller', function () {
                     "content-type": "application/json"
                 },
                 payload: {
-                    "user": {"email": "1@gmail.com", "password": "123456", "name": "alex-wow"}
+                    "user": {"email": "1@gmail.com", "password": "987654321", "name": "alex-wow"}
                 }
             };
             server.inject(options, function (response) {
@@ -177,7 +177,8 @@ describe('controller', function () {
                 var payload = JSON.parse(response.payload);
 
                 expect(payload.data.type).to.equal('users');
-                expect(payload.data.id).to.equal('1');
+                expect(payload.data.attributes.name).to.equal('alex-wow');
+                expect(payload.data.attributes.email).to.equal('1@gmail.com');
                 done();
             });
         });
