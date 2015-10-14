@@ -1,7 +1,7 @@
 var Joi = require('joi');
 
 function UserRouteValidator() {
-};
+}
 
 UserRouteValidator.prototype = {
     validateCreateNewUser: function validateCreateNewUser() {
@@ -18,18 +18,9 @@ UserRouteValidator.prototype = {
                 })
             },
             failAction: function (request, reply, source, error) {
-
-                if (error.isBoom && error.output.statusCode === 400 && error.data.name === 'ValidationError') {
-                    error.output.statusCode = 422;
-                    error.output.payload = {
-                        "code": 422,
-                        "message": "422 Unprocessable Entity",
-                        "description": "The server was unable to process the Request payload: " + error.data.details[0].message
-                    };
-                    return reply(error);
-                }
+                return handleError(reply, error);
             }
-        }
+        };
     },
     validateListUserById: function validateListUserById() {
         return {
@@ -37,27 +28,30 @@ UserRouteValidator.prototype = {
                 user_id: Joi.string().regex(/^[0-9]{1,}$/)
             },
             failAction: function (request, reply, source, error) {
-
-                if (error.isBoom && error.output.statusCode === 400 && error.data.name === 'ValidationError') {
-                    error.output.statusCode = 422;
-                    error.output.payload = {
-                        "code": 422,
-                        "message": "422 Unprocessable Entity",
-                        "description": "The server was unable to process the Request payload: " + error.data.details[0].message
-                    };
-                    return reply(error);
-                }
+                return handleError(reply, error);
             }
-        }
+        };
     },
     validateListAllUsers: function validateListAllUsers() {
         return {
             params: {
                 id: Joi.string().regex(/^[0-9]{1,1}$/)
             }
-        }
+        };
     }
 };
+
+function handleError(reply, error) {
+    if (error.isBoom && error.output.statusCode === 400 && error.data.name === 'ValidationError') {
+        error.output.statusCode = 422;
+        error.output.payload = {
+            "code": 422,
+            "message": "422 Unprocessable Entity",
+            "description": "The server was unable to process the Request payload: " + error.data.details[0].message
+        };
+        return reply(error);
+    }
+}
 
 var userRouteValidator = new UserRouteValidator();
 module.exports = userRouteValidator;

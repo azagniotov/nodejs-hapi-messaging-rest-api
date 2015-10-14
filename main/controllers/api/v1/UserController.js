@@ -41,7 +41,6 @@ UserController.prototype = {
                 reply(userSerializer.serialize(user.get({plain: true}))).code(200);
             }
         }).catch(function (error) {
-            console.log(error);
             reply({
                 'code': 500,
                 'message': error.message,
