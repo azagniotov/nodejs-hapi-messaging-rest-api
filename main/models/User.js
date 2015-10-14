@@ -41,7 +41,7 @@ function make(db) {
             }
         }
     });
-    return User;
+    global.__models.User = User;
 }
 
 module.exports = {make: make};

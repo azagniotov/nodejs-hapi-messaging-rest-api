@@ -15,9 +15,10 @@
   },
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js",
-    "test": "npm run unit && npm run integration",
-    "unit": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --color --growl --captureExceptions test/unit",
-    "integration": "istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --color --growl --captureExceptions test/integration"
+    "test": "npm run models && npm run routes && npm run integration",
+    "routes": "istanbul cover --include-all-sources _mocha -- --colors --growl --full-trace test/routes -R spec",
+    "models": "istanbul cover --include-all-sources _mocha -- --colors --growl --full-trace test/models -R spec",
+    "integration": "istanbul cover --include-all-sources _mocha -- --colors --growl --full-trace test/integration -R spec"
   },
   "bugs": {
     "url": "https://github.com/azagniotov/nodejs-hapi-messaging-rest-api/issues"
@@ -34,7 +35,8 @@
   "devDependencies": {
     "codeclimate-test-reporter": "^0.1.1",
     "istanbul": "^0.3.22",
-    "jasmine-node": "^1.14.5",
+    "mocha": "^2.3.3",
+    "chai": "^3.3.0",
     "nodemon": "^1.7.1"
   }
 }

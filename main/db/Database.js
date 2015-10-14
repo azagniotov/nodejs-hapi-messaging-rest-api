@@ -10,13 +10,12 @@ function init(databaseHost) {
             idle: 10000
         },
         // SQLite only 
-        storage: databaseHost === 'testing' ? ':memory:' :  __main_root + 'db/' + databaseHost + '.sqlite3'
+        storage: databaseHost === 'production' ?  __main_root + 'db/' + databaseHost + '.sqlite3' : ':memory:'
     });
     global.__models = {};
+    require(__main_root + 'models/User.js').make(db);
 
-    var User = require(__main_root + 'models/User.js').make(db);
-    User.sync({force: false});
-    global.__models.User = User;
+    return db;
 }
 
 module.exports = {init: init};

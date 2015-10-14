@@ -1,7 +1,5 @@
-function listen(databaseHost) {
+function listen() {
     var Hapi = require('hapi');
-    require(__main_root + 'db/Database.js').init(databaseHost);
-
     var rootRoute = require(__main_root + 'routes/RootRoute.js');
     var dataRoutes = require(__main_root + 'routes/api/v1/DataRoute.js');
     var userRoutes = require(__main_root + 'routes/api/v1/UserRoute.js');
