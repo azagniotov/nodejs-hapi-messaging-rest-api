@@ -3,7 +3,7 @@
     global.__project_root = __dirname + '/';
     global.__main_root = __project_root + 'main/';
 
-    var sequelize = require(__main_root + 'db/Database.js').init("production");
+    var sequelize = require(__main_root + 'db/Database.js').init("production", true);
     sequelize.sync({force: false}).then(function() {
         console.log('Database "' + sequelize.config.database + '" is up');
 

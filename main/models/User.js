@@ -38,9 +38,14 @@ function make(db) {
             beforeCreate: function (user, options) {
                 var uuid = require('node-uuid');
                 user.authToken = uuid.v4().replace(/-/g, '');
+
+                var bcrypt = require('bcrypt');
+                user.salt = bcrypt.genSaltSync(10);
+                user.password = bcrypt.hashSync(user.password, user.salt);
             }
         }
     });
+
     global.__models.User = User;
 }
 

@@ -25,6 +25,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "hapi": "^10.4.1",
     "joi": "^6.9.0",
     "jsonapi-serializer": "^2.0.3",

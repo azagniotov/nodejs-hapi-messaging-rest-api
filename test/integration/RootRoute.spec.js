@@ -4,7 +4,7 @@ describe('data route', function () {
     var server;
 
     before(function (done) {
-        var sequelize = require(__main_root + 'db/Database.js').init("test_integration");
+        var sequelize = require(__main_root + 'db/Database.js').init("test_integration", true);
         sequelize.sync({force: false}).then(function () {
             var hapiServer = require(__main_root + 'server/Server');
             server = hapiServer.listen();

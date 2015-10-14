@@ -1,5 +1,5 @@
 /* istanbul ignore next */
-function init(databaseHost) {
+function init(databaseHost, logging) {
     var Sequelize = require('sequelize');
     var db = new Sequelize(databaseHost, null, null, {
         host: 'localhost',
@@ -9,7 +9,8 @@ function init(databaseHost) {
             min: 0,
             idle: 10000
         },
-        // SQLite only 
+        // SQLite only
+        logging: logging === false ? false : console.log,
         storage: databaseHost === 'production' ?  __main_root + 'db/' + databaseHost + '.sqlite3' : ':memory:'
     });
     global.__models = {};
