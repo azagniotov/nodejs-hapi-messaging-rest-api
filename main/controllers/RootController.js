@@ -1,6 +1,7 @@
 function RootController() {
 };
 
+/* istanbul ignore next */
 RootController.prototype = {
     apiDiscovery: function apiDiscovery(request, reply) {
 

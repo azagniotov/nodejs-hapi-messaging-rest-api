@@ -2,6 +2,12 @@
 function make(db) {
     var Sequelize = require('sequelize');
     var User = db.define('user', {
+        id: {
+            type: Sequelize.INTEGER,
+            field: 'id',
+            autoIncrement: true,
+            primaryKey: true
+        },
         name: {
             type: Sequelize.STRING,
             field: 'name',

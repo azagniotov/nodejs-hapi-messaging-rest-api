@@ -30,7 +30,24 @@ UserController.prototype = {
         });
     },
     listUserById: function listUserById(request, reply) {
-
+        User.findById(request.params.user_id).then(function (user) {
+            if (!user || user == null) {
+                reply({
+                    'code': 404,
+                    'message': '404 Not Found',
+                    'description': "User with id '" + request.params.user_id + "' does not exist"
+                }).code(404);
+            } else {
+                reply(userSerializer.serialize(user.get({plain: true}))).code(200);
+            }
+        }).catch(function (error) {
+            console.log(error);
+            reply({
+                'code': 500,
+                'message': error.message,
+                'description': error.errors
+            }).code(500);
+        });
     },
     listAllUsers: function listAllUsers(request, reply) {
 

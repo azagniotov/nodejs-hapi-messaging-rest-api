@@ -34,7 +34,19 @@ UserRouteValidator.prototype = {
     validateListUserById: function validateListUserById() {
         return {
             params: {
-                id: Joi.string().regex(/^[0-9]{1,1}$/)
+                user_id: Joi.string().regex(/^[0-9]{1,}$/)
+            },
+            failAction: function (request, reply, source, error) {
+
+                if (error.isBoom && error.output.statusCode === 400 && error.data.name === 'ValidationError') {
+                    error.output.statusCode = 422;
+                    error.output.payload = {
+                        "code": 422,
+                        "message": "422 Unprocessable Entity",
+                        "description": "The server was unable to process the Request payload: " + error.data.details[0].message
+                    };
+                    return reply(error);
+                }
             }
         }
     },

@@ -1,5 +1,6 @@
 var expect = require('../test_helper').expect;
 
+/* istanbul ignore next */
 describe('user model', function () {
     var User;
 
