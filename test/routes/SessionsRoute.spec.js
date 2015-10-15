@@ -1,7 +1,7 @@
 var expect    = require('../test_helper').expect;
 
 /* istanbul ignore next */
-describe('root route', function () {
+describe('sessions route', function () {
     var server, route;
     before(function (done) {
         var sequelize = require(__main_root + 'db/Database.js').init("test_routes", false);
@@ -9,7 +9,7 @@ describe('root route', function () {
             var hapiServer = require(__main_root + 'server/Server');
             server = hapiServer.listen();
             server.start(function () {
-                route  = server.lookup('root');
+                route  = server.lookup('authenticate_user_with_basic');
                 done();
             });
         });
@@ -21,7 +21,7 @@ describe('root route', function () {
     });
 
     it("should have expected path", function(done) {
-        expect(route.path).to.equal('/');
+        expect(route.path).to.equal('/api/v1/sessions');
         done();
     });
 
@@ -31,15 +31,14 @@ describe('root route', function () {
     });
 
     it("should have expected description", function(done) {
-        expect(route.settings.description).to.equal('Gets all of the endpoint categories that the API supports');
+        expect(route.settings.description).to.equal('Authenticate user with Basic Authentication');
         done();
     });
 
-    it("responds with status code 200 and hello world text", function (done) {
-        var options = {method: "GET", url: "/"};
+    it("responds with status code 401 when Basic authentication header is not set", function (done) {
+        var options = {method: "GET", url: "/api/v1/sessions"};
         server.inject(options, function (response) {
-            expect(response.statusCode).to.equal(200);
-            expect(response.payload).to.not.be.null;
+            expect(response.statusCode).to.equal(401);
             done();
         });
     });
