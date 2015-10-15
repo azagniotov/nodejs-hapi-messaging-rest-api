@@ -5,8 +5,8 @@ describe('user model', function () {
     var User;
 
     before(function (done) {
-        var sequelize = require(__main_root + 'db/Database.js').init("test_models", false);
-        sequelize.sync({force: false}).then(function () {
+        var sequelize = require(__main_root + 'db/Database.js').init("test_user_model", false);
+        sequelize.sync({force: true}).then(function () {
             var hapiServer = require(__main_root + 'server/Server');
             var server = hapiServer.listen();
             server.start(function () {

@@ -1,27 +1,31 @@
 var expect = require('../test_helper').expect;
-var destroy = require('../test_helper').destroy;
 
 /* istanbul ignore next */
-describe('controller', function () {
+describe('user controller', function () {
     this.timeout(5000);
-
-    var sequelize, server, User;
-    before(function (done) {
-        sequelize = require(__main_root + 'db/Database.js').init("test_controllers", false);
-        sequelize.sync({force: false}).then(function () {
-            var hapiServer = require(__main_root + 'server/Server');
-            server = hapiServer.listen();
-            server.start(function () {
-                User = global.__models.User;
-                done();
-            });
-        });
-    });
 
     describe('createNewUser', function () {
 
+        var sequelize, server, User;
+        before(function (done) {
+            sequelize = require(__main_root + 'db/Database.js').init("user_controller_createNewUser", false);
+            sequelize.sync({force: true}).then(function () {
+                var hapiServer = require(__main_root + 'server/Server');
+                server = hapiServer.listen();
+                server.start(function () {
+                    User = global.__models.User;
+                    done();
+                });
+            });
+        });
+
         afterEach(function (done) {
-            destroy(sequelize, User, done);
+            User.destroy({
+                truncate: true,
+                force: false
+            }).then(function (affectedRows) {
+                done();
+            })
         });
 
         it("should create new user on successful POST", function (done) {
@@ -40,7 +44,7 @@ describe('controller', function () {
 
                 var payload = JSON.parse(response.payload);
                 expect(payload.data.type).to.equal('users');
-                expect(payload.data.id).to.equal('1');
+                expect(payload.data.attributes.email).to.equal('1@gmail.com');
 
                 done();
             });
@@ -139,7 +143,19 @@ describe('controller', function () {
 
     describe('listUserById', function () {
 
-        var createUserId;
+        var sequelize, server, User, createUserId;
+
+        before(function (done) {
+            sequelize = require(__main_root + 'db/Database.js').init("user_controller_listUserById", false);
+            sequelize.sync({force: true}).then(function () {
+                var hapiServer = require(__main_root + 'server/Server');
+                server = hapiServer.listen();
+                server.start(function () {
+                    User = global.__models.User;
+                    done();
+                });
+            });
+        });
 
         beforeEach(function (done) {
             var options = {
@@ -152,16 +168,25 @@ describe('controller', function () {
                     "user": {"email": "1@gmail.com", "password": "987654321", "name": "alex-wow"}
                 }
             };
-            server.inject(options, function (response) {
-                expect(response.statusCode).to.equal(201);
-                var payload = JSON.parse(response.payload);
-                createUserId = payload.data.id;
-                done();
-            });
-        });
 
-        afterEach(function (done) {
-            destroy(sequelize, User, done);
+            User.destroy({
+                truncate: true,
+                force: true
+            }).then(function (affectedRows) {
+                server.inject(options, function (response) {
+
+                    console.log(affectedRows);
+
+                    var payload = JSON.parse(response.payload);
+                    console.log(payload);
+
+                    expect(response.statusCode).to.equal(201);
+
+                    createUserId = payload.data.id;
+                    done();
+                });
+            });
+
         });
 
         it("should list user by id", function (done) {

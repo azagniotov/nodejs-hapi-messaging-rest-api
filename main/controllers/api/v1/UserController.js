@@ -14,6 +14,10 @@ UserController.prototype = {
         }).then(function (user) {
             reply(userSerializer.serialize(user.get({plain: true}))).code(201);
         }).catch(function (error) {
+
+            console.log(error);
+
+
             if (error.name === 'SequelizeUniqueConstraintError') {
                 reply({
                     'code': 409,

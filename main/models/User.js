@@ -39,6 +39,9 @@ function make(db) {
         indexes: [{
             name: 'user_auth_token',
             fields: ['auth_token']
+        }, {
+            name: 'user_email',
+            fields: ['email']
         }],
         hooks: {
             beforeCreate: function (user, options) {
@@ -52,7 +55,7 @@ function make(db) {
         }
     });
 
-    global.__models.User = User;
+    return User;
 }
 
 module.exports = {make: make};

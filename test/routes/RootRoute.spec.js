@@ -4,8 +4,8 @@ var expect    = require('../test_helper').expect;
 describe('root route', function () {
     var server, route;
     before(function (done) {
-        var sequelize = require(__main_root + 'db/Database.js').init("test_routes", false);
-        sequelize.sync({force: false}).then(function () {
+        var sequelize = require(__main_root + 'db/Database.js').init("test_root_route", false);
+        sequelize.sync({force: true}).then(function () {
             var hapiServer = require(__main_root + 'server/Server');
             server = hapiServer.listen();
             server.start(function () {

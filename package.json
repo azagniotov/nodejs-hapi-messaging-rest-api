@@ -26,6 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "debug": "^2.2.0",
     "hapi": "^10.4.1",
     "hapi-auth-basic": "^3.0.0",
     "joi": "^6.9.0",

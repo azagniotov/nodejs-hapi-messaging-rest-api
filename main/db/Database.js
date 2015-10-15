@@ -11,10 +11,12 @@ function init(databaseHost, logging) {
         },
         // SQLite only
         logging: logging === false ? false : console.log,
-        storage: databaseHost === 'production' ?  __main_root + 'db/' + databaseHost + '.sqlite3' : ':memory:'
+        storage: __main_root + 'db/' + databaseHost + '.sqlite3'
     });
     global.__models = {};
-    require(__main_root + 'models/User.js').make(db);
+    global.__schemas = {};
+    var User = require(__main_root + 'models/User.js').make(db);
+    global.__models.User = User;
 
     return db;
 }
