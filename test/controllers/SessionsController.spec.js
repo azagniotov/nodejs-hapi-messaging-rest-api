@@ -1,5 +1,4 @@
 var expect = require('../test_helper').expect;
-var Sequelize = require('../test_helper').Sequelize;
 
 /* istanbul ignore next */
 describe('sessions controller', function () {
