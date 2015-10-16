@@ -1,0 +1,9 @@
+languages:
+  Ruby: true
+  JavaScript: true
+  PHP: true
+  Python: true
+exclude_paths:
+- "main/config/database.js"
+- "app.js"
+

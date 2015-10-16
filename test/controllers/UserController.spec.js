@@ -30,6 +30,27 @@ describe('user controller', function () {
 
     describe('createNewUser', function () {
 
+        it("should fail to create new user when POSTed invalid JSON", function (done) {
+            var options = {
+                method: "POST",
+                url: "/api/v1/users",
+                headers: {
+                    "content-type": "application/json"
+                },
+                payload: '{ "key": "not properly closed value }'
+            };
+            server.inject(options, function (response) {
+                expect(response.statusCode).to.equal(400);
+
+                var error = JSON.parse(response.payload);
+                expect(error.code).to.equal(400);
+                expect(error.message).to.equal('400 Bad Request');
+                expect(error.description).to.equal('The syntax of the request entity is incorrect');
+
+                done();
+            });
+        });
+
         it("should create new user on successful POST", function (done) {
             var options = {
                 method: "POST",
