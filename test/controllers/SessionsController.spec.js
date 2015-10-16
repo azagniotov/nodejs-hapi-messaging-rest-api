@@ -52,19 +52,73 @@ describe('sessions controller', function () {
 
 
         it("should authenticate user when Basic header is set", function (done) {
-            var get_options = {
+            var options = {
                 method: "GET",
                 url: "/api/v1/sessions",
                 headers: {
                     authorization: 'Basic ' + (new Buffer(email + ':' + password, 'utf8')).toString('base64')
                 }
             };
-            server.inject(get_options, function (response) {
+            server.inject(options, function (response) {
                 expect(response.statusCode).to.equal(200);
                 var payload = JSON.parse(response.payload);
 
                 expect(payload.auth_token).to.have.length.of.at.least(32);
                 expect(payload.email).to.equal(email);
+                done();
+            });
+        });
+
+        it("responds with status code 401 when Basic authentication header is not set", function (done) {
+            var options = {method: "GET", url: "/api/v1/sessions"};
+            server.inject(options, function (response) {
+                expect(response.statusCode).to.equal(401);
+
+                var error = JSON.parse(response.payload);
+                expect(error.statusCode).to.equal(401);
+                expect(error.error).to.equal('Unauthorized');
+                expect(error.message).to.equal('Missing authentication');
+
+                done();
+            });
+        });
+
+        it("responds with status code 401 when Basic authentication header contains wrong email", function (done) {
+            var options = {
+                method: "GET",
+                url: "/api/v1/sessions",
+                headers: {
+                    authorization: 'Basic ' + (new Buffer('non-existent@gmail.com:' + password, 'utf8')).toString('base64')
+                }
+            };
+            server.inject(options, function (response) {
+                expect(response.statusCode).to.equal(401);
+
+                var error = JSON.parse(response.payload);
+                expect(error.statusCode).to.equal(401);
+                expect(error.error).to.equal('Unauthorized');
+                expect(error.message).to.equal('Bad username or password');
+
+                done();
+            });
+        });
+
+        it("responds with status code 401 when Basic authentication header contains wrong password", function (done) {
+            var options = {
+                method: "GET",
+                url: "/api/v1/sessions",
+                headers: {
+                    authorization: 'Basic ' + (new Buffer(email + ':wrong-password', 'utf8')).toString('base64')
+                }
+            };
+            server.inject(options, function (response) {
+                expect(response.statusCode).to.equal(401);
+
+                var error = JSON.parse(response.payload);
+                expect(error.statusCode).to.equal(401);
+                expect(error.error).to.equal('Unauthorized');
+                expect(error.message).to.equal('Bad username or password');
+
                 done();
             });
         });

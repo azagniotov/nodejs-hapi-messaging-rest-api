@@ -1,7 +1,8 @@
 "use strict";
 
 var fs = require("fs");
-var environment = process.env.NODE_ENV || "development";
+var environment = process.env.NODE_ENV;
+
 var config = require(__main_root + 'config/database.js')[environment];
 var Sequelize = require("sequelize");
 var sequelizeInstance = new Sequelize(config.database, config.username, config.password, config);

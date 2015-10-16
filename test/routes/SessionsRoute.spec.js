@@ -34,12 +34,4 @@ describe('sessions route', function () {
         expect(route.settings.description).to.equal('Authenticate user with Basic Authentication');
         done();
     });
-
-    it("responds with status code 401 when Basic authentication header is not set", function (done) {
-        var options = {method: "GET", url: "/api/v1/sessions"};
-        server.inject(options, function (response) {
-            expect(response.statusCode).to.equal(401);
-            done();
-        });
-    });
 });

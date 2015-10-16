@@ -15,18 +15,16 @@ UserController.prototype = {
         }).then(function (user) {
             reply(userSerializer.serialize(user.get({plain: true}))).code(201);
         }).catch(function (error) {
-            if (error.name === 'SequelizeUniqueConstraintError') {
-                reply({
-                    'code': 409,
-                    'message': '409 Conflict',
-                    'description': "User with email '" + payload.user.email + "' is already registered"
-                }).code(409);
-            }
+            reply({
+                'code': 409,
+                'message': '409 Conflict',
+                'description': "User with email '" + payload.user.email + "' is already registered"
+            }).code(409);
         });
     },
     listUserById: function listUserById(request, reply) {
 
-        controllerUtils.apiKeyAuthorize(request, reply, function() {
+        controllerUtils.apiKeyAuthorize(request, reply, function () {
 
             User.findById(request.params.user_id).then(function (user) {
                 if (!user || user === null) {

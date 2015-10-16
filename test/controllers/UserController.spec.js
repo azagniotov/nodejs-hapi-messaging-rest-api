@@ -242,6 +242,47 @@ describe('user controller', function () {
             });
         });
 
+        it("should return 401 when trying to list user by id with invalid auth token", function (done) {
+            var get_options = {
+                method: "GET",
+                url: "/api/v1/users/1",
+                headers: {
+                    "content-type": "application/json",
+                    "x-api-key": "invalid_token_value"
+                }
+            };
+            server.inject(get_options, function (response) {
+                expect(response.statusCode).to.equal(401);
+
+                var error = JSON.parse(response.payload);
+                expect(error.code).to.equal(401);
+                expect(error.message).to.equal('401 Unauthorized');
+                expect(error.description).to.equal('Api key is not valid');
+
+                done();
+            });
+        });
+
+        it("should return 401 when trying to list user by id without auth token header", function (done) {
+            var get_options = {
+                method: "GET",
+                url: "/api/v1/users/1",
+                headers: {
+                    "content-type": "application/json"
+                }
+            };
+            server.inject(get_options, function (response) {
+                expect(response.statusCode).to.equal(401);
+
+                var error = JSON.parse(response.payload);
+                expect(error.code).to.equal(401);
+                expect(error.message).to.equal('401 Unauthorized');
+                expect(error.description).to.equal('X-Api-Key header is not set');
+
+                done();
+            });
+        });
+
         it("should error when trying to list user by an invalid id", function (done) {
             var get_options = {
                 method: "GET",

@@ -38,23 +38,6 @@ describe('user route', function () {
             expect(route.settings.description).to.equal('Creates new user');
             done();
         });
-
-        it("responds with 201 on successful POST", function (done) {
-            var options = {
-                method: "POST",
-                url: "/api/v1/users",
-                headers: {
-                    "content-type": "application/json"
-                },
-                payload: {
-                    "user": {"email": "1@gmail.com", "password": "123456", "name": "alex"}
-                }
-            };
-            server.inject(options, function (response) {
-                expect(response.statusCode).to.equal(201);
-                done();
-            });
-        });
     });
 
     describe('list user by id route', function () {
@@ -82,20 +65,6 @@ describe('user route', function () {
         it("should have expected description", function (done) {
             expect(route.settings.description).to.equal('List user by id');
             done();
-        });
-
-        it("responds with 401 when no API key is set", function (done) {
-            var options = {
-                method: "GET",
-                url: "/api/v1/users/888",
-                headers: {
-                    "content-type": "application/json"
-                }
-            };
-            server.inject(options, function (response) {
-                expect(response.statusCode).to.equal(401);
-                done();
-            });
         });
     });
 });

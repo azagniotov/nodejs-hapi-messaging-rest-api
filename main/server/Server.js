@@ -36,7 +36,11 @@ function listen() {
                     } else {
                         var bcrypt = require('bcrypt-nodejs');
                         var authenticated = bcrypt.compareSync(password, foundUser.password);
-                        callback(null, authenticated, {email: email, auth_token: foundUser.authToken}); // will invoke the handler
+                        if (authenticated === false) {
+                            callback(null, false);
+                        } else {
+                            callback(null, true, {email: email, auth_token: foundUser.authToken}); // will invoke the handler
+                        }
                     }
                 });
             }
