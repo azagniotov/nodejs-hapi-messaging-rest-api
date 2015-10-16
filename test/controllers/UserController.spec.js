@@ -4,29 +4,23 @@ var expect = require('../test_helper').expect;
 describe('user controller', function () {
     this.timeout(5000);
 
+    require(__project_root + 'app.js');
+    var User = require(__main_root + 'db/DB.js').models.user, server;
+
+    before(function (done) {
+        User.sync({force: true}).then(function () {
+            server = require(__project_root + 'app.js').server;
+            done();
+        });
+    });
+
+    afterEach(function (done) {
+        User.sync({force: true}).then(function () {
+            done();
+        });
+    });
+
     describe('createNewUser', function () {
-
-        var sequelize, server, User;
-        before(function (done) {
-            sequelize = require(__main_root + 'db/Database.js').init("user_controller_createNewUser", false);
-            sequelize.sync({force: true}).then(function () {
-                var hapiServer = require(__main_root + 'server/Server');
-                server = hapiServer.listen();
-                server.start(function () {
-                    User = global.__models.User;
-                    done();
-                });
-            });
-        });
-
-        afterEach(function (done) {
-            User.destroy({
-                truncate: true,
-                force: false
-            }).then(function (affectedRows) {
-                done();
-            })
-        });
 
         it("should create new user on successful POST", function (done) {
             var options = {
@@ -143,20 +137,7 @@ describe('user controller', function () {
 
     describe('listUserById', function () {
 
-        var sequelize, server, User, createUserId;
-
-        before(function (done) {
-            sequelize = require(__main_root + 'db/Database.js').init("user_controller_listUserById", false);
-            sequelize.sync({force: true}).then(function () {
-                var hapiServer = require(__main_root + 'server/Server');
-                server = hapiServer.listen();
-                server.start(function () {
-                    User = global.__models.User;
-                    done();
-                });
-            });
-        });
-
+        var createUserId;
         beforeEach(function (done) {
             var options = {
                 method: "POST",
@@ -169,22 +150,11 @@ describe('user controller', function () {
                 }
             };
 
-            User.destroy({
-                truncate: true,
-                force: true
-            }).then(function (affectedRows) {
-                server.inject(options, function (response) {
-
-                    console.log(affectedRows);
-
-                    var payload = JSON.parse(response.payload);
-                    console.log(payload);
-
-                    expect(response.statusCode).to.equal(201);
-
-                    createUserId = payload.data.id;
-                    done();
-                });
+            server.inject(options, function (response) {
+                var payload = JSON.parse(response.payload);
+                expect(response.statusCode).to.equal(201);
+                createUserId = payload.data.id;
+                done();
             });
 
         });

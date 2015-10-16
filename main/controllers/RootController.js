@@ -1,5 +1,5 @@
 function RootController() {
-};
+}
 
 /* istanbul ignore next */
 RootController.prototype = {

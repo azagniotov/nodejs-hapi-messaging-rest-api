@@ -1,35 +1,35 @@
-/* istanbul ignore next */
-function make(db) {
-    var Sequelize = require('sequelize');
-    var User = db.define('user', {
+"use strict";
+
+module.exports = function (sequelize, DataTypes) {
+    return sequelize.define('user', {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             field: 'id',
             autoIncrement: true,
             primaryKey: true
         },
         name: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             field: 'name',
             allowNull: false
         },
         email: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             field: 'email',
             unique: true,
             allowNull: false
         },
         password: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             field: 'password',
             allowNull: false
         },
         salt: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             field: 'salt'
         },
         authToken: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             field: 'auth_token'
         }
     }, {
@@ -54,8 +54,4 @@ function make(db) {
             }
         }
     });
-
-    return User;
-}
-
-module.exports = {make: make};
+};

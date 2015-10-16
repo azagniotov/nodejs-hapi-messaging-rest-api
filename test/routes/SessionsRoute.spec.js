@@ -3,15 +3,15 @@ var expect    = require('../test_helper').expect;
 /* istanbul ignore next */
 describe('sessions route', function () {
     var server, route;
+
+    require(__project_root + 'app.js');
+    var User = require(__main_root + 'db/DB.js').models.user;
+
     before(function (done) {
-        var sequelize = require(__main_root + 'db/Database.js').init("test_session_route", false);
-        sequelize.sync({force: true}).then(function () {
-            var hapiServer = require(__main_root + 'server/Server');
-            server = hapiServer.listen();
-            server.start(function () {
-                route  = server.lookup('authenticate_user_with_basic');
-                done();
-            });
+        User.sync({force: true}).then(function () {
+            server = require(__project_root + 'app.js').server;
+            route = server.lookup('authenticate_user_with_basic');
+            done();
         });
     });
 

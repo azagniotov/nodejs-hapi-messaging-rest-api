@@ -4,24 +4,22 @@ var expect = require('../test_helper').expect;
 describe('user route', function () {
 
     var server;
+
+    require(__project_root + 'app.js');
+    var User = require(__main_root + 'db/DB.js').models.user;
+
     before(function (done) {
-        var sequelize = require(__main_root + 'db/Database.js').init("test_user_route", false);
-        sequelize.sync({force: true}).then(function () {
-            var hapiServer = require(__main_root + 'server/Server');
-            server = hapiServer.listen();
-            server.start(function () {
-                done();
-            });
+        User.sync({force: true}).then(function () {
+            server = require(__project_root + 'app.js').server;
+            done();
         });
     });
 
     describe('create new user route', function () {
         var route;
         before(function (done) {
-            server.start(function () {
-                route = server.lookup('create_new_user');
-                done();
-            });
+            route = server.lookup('create_new_user');
+            done();
         });
 
         it("should not be null", function (done) {
@@ -65,10 +63,8 @@ describe('user route', function () {
     describe('list user by id route', function () {
         var route;
         before(function (done) {
-            server.start(function () {
-                route = server.lookup('list_user_by_id');
-                done();
-            });
+            route = server.lookup('list_user_by_id');
+            done();
         });
 
         it("should not be null", function (done) {

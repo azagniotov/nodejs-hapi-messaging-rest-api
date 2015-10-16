@@ -28,7 +28,7 @@ function listen() {
     server.register(require('hapi-auth-basic'), function (error) {
         server.auth.strategy('simple', 'basic', {
             validateFunc: function (request, email, password, callback) {
-                var User = global.__models.User;
+                var User = require(__main_root + 'db/DB.js').models.user;
                 User.findOne({where: {email: email}}).then(function (foundUser) {
 
                     if (!foundUser || foundUser == null) {

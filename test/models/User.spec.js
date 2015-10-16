@@ -2,26 +2,19 @@ var expect = require('../test_helper').expect;
 
 /* istanbul ignore next */
 describe('user model', function () {
-    var User;
+    require(__project_root + 'app.js');
+    var User = require(__main_root + 'db/DB.js').models.user;
 
     before(function (done) {
-        var sequelize = require(__main_root + 'db/Database.js').init("test_user_model", false);
-        sequelize.sync({force: true}).then(function () {
-            var hapiServer = require(__main_root + 'server/Server');
-            var server = hapiServer.listen();
-            server.start(function () {
-                User = global.__models.User;
-                done();
-            });
+        User.sync({force: true}).then(function () {
+            done();
         });
     });
 
     afterEach(function (done) {
-        User.destroy({
-            truncate: true
-        }).then(function (affectedRows) {
+        User.sync({force: true}).then(function () {
             done();
-        })
+        });
     });
 
     it('should save new user to DB when all required properties are set', function (done) {
