@@ -2,16 +2,16 @@ var expect    = require('../test_helper').expect;
 
 /* istanbul ignore next */
 describe('sessions route', function () {
+
     var server, route;
-
-    require(__project_root + 'app.js');
-    var User = require(__main_root + 'db/DB.js').models.user;
-
     before(function (done) {
-        User.sync({force: true}).then(function () {
-            server = require(__project_root + 'app.js').server;
-            route = server.lookup('authenticate_user_with_basic');
-            done();
+        var db = require(__main_root + 'db/DB.js');
+        db.instance.sync().then(function () {
+            server = require(__main_root + 'server/Server').listen();
+            server.start(function () {
+                route = server.lookup('authenticate_user_with_basic');
+                done();
+            });
         });
     });
 

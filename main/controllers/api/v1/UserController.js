@@ -20,12 +20,6 @@ UserController.prototype = {
                     'message': '409 Conflict',
                     'description': "User with email '" + payload.user.email + "' is already registered"
                 }).code(409);
-            } else {
-                reply({
-                    'code': 500,
-                    'message': error.message,
-                    'description': error.errors
-                }).code(500);
             }
         });
     },
@@ -40,12 +34,6 @@ UserController.prototype = {
             } else {
                 reply(userSerializer.serialize(user.get({plain: true}))).code(200);
             }
-        }).catch(function (error) {
-            reply({
-                'code': 500,
-                'message': error.message,
-                'description': error.errors
-            }).code(500);
         });
     },
     listAllUsers: function listAllUsers(request, reply) {

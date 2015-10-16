@@ -5,8 +5,7 @@
 
     var db = require(__main_root + 'db/DB.js');
     db.instance.sync().then(function () {
-        var hapiServer = require(__main_root + 'server/Server');
-        var server =  hapiServer.listen();
+        var server = require(__main_root + 'server/Server').listen();
         server.start(function () {
             console.log('Server running at:', server.info.uri);
             module.exports = {server: server};

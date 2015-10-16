@@ -4,13 +4,10 @@ var expect = require('../test_helper').expect;
 describe('user route', function () {
 
     var server;
-
-    require(__project_root + 'app.js');
-    var User = require(__main_root + 'db/DB.js').models.user;
-
     before(function (done) {
-        User.sync({force: true}).then(function () {
-            server = require(__project_root + 'app.js').server;
+        var db = require(__main_root + 'db/DB.js');
+        db.instance.sync().then(function () {
+            server = require(__main_root + 'server/Server').listen();
             done();
         });
     });

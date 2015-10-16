@@ -2,7 +2,6 @@ var expect = require('../test_helper').expect;
 
 /* istanbul ignore next */
 describe('user model', function () {
-    require(__project_root + 'app.js');
     var User = require(__main_root + 'db/DB.js').models.user;
 
     before(function (done) {

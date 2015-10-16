@@ -5,17 +5,25 @@ var Sequelize = require('../test_helper').Sequelize;
 describe('sessions controller', function () {
     this.timeout(5000);
 
-    require(__project_root + 'app.js');
-    var User = require(__main_root + 'db/DB.js').models.user, server;
-
+    var server, User;
     before(function (done) {
-        User.sync({force: true}).then(function () {
-            server = require(__project_root + 'app.js').server;
-            done();
+        var db = require(__main_root + 'db/DB.js');
+        db.instance.sync().then(function () {
+            server = require(__main_root + 'server/Server').listen();
+            server.start(function () {
+                User = require(__main_root + 'db/DB.js').models.user;
+                done();
+            });
         });
     });
 
     afterEach(function (done) {
+        User.destroy({truncate: true, force: true}).then(function () {
+            done();
+        });
+    });
+
+    after(function (done) {
         User.sync({force: true}).then(function () {
             done();
         });
