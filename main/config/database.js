@@ -25,7 +25,7 @@ module.exports = {
             "idle": 10000
         },
         "logging": false,
-        "storage": global.__main_root + "db/test.sqlite3"
+        "storage": ":memory:"
     },
     "production": {
         "host": "localhost",
