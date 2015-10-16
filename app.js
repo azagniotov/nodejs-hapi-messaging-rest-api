@@ -7,12 +7,9 @@
     db.instance.sync().then(function () {
         var hapiServer = require(__main_root + 'server/Server');
         var server =  hapiServer.listen();
-        module.exports = {server: server};
-        /*
         server.start(function () {
             console.log('Server running at:', server.info.uri);
             module.exports = {server: server};
         });
-        */
     });
 })();
