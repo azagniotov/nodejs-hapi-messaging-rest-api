@@ -31,7 +31,7 @@ function listen() {
                 var User = require(__main_root + 'db/DB.js').models.user;
                 User.findOne({where: {email: email}}).then(function (foundUser) {
 
-                    if (!foundUser || foundUser == null) {
+                    if (!foundUser || foundUser === null) {
                         callback(null, false);
                     } else {
                         var bcrypt = require('bcrypt-nodejs');

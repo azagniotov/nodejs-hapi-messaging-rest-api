@@ -167,6 +167,7 @@ describe('user controller', function () {
     describe('listUserById', function () {
 
         var createUserId;
+        var authToken;
         beforeEach(function (done) {
             var options = {
                 method: "POST",
@@ -183,9 +184,21 @@ describe('user controller', function () {
                 var payload = JSON.parse(response.payload);
                 expect(response.statusCode).to.equal(201);
                 createUserId = payload.data.id;
-                done();
-            });
 
+                var get_token_options = {
+                    method: "GET",
+                    url: "/api/v1/sessions",
+                    headers: {
+                        authorization: 'Basic ' + (new Buffer('1@gmail.com:987654321', 'utf8')).toString('base64')
+                    }
+                };
+                server.inject(get_token_options, function (response) {
+                    var payload = JSON.parse(response.payload);
+                    expect(response.statusCode).to.equal(200);
+                    authToken = payload.auth_token;
+                    done();
+                });
+            });
         });
 
         it("should list user by id", function (done) {
@@ -193,7 +206,8 @@ describe('user controller', function () {
                 method: "GET",
                 url: "/api/v1/users/" + createUserId,
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "x-api-key": authToken
                 }
             };
             server.inject(get_options, function (response) {
@@ -212,7 +226,8 @@ describe('user controller', function () {
                 method: "GET",
                 url: "/api/v1/users/888",
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "x-api-key": authToken
                 }
             };
             server.inject(get_options, function (response) {
@@ -232,7 +247,8 @@ describe('user controller', function () {
                 method: "GET",
                 url: "/api/v1/users/abc",
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "x-api-key": authToken
                 }
             };
             server.inject(get_options, function (response) {

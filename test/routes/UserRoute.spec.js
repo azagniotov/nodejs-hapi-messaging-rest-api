@@ -84,7 +84,7 @@ describe('user route', function () {
             done();
         });
 
-        it("responds with 404 on successful GET", function (done) {
+        it("responds with 401 when no API key is set", function (done) {
             var options = {
                 method: "GET",
                 url: "/api/v1/users/888",
@@ -93,7 +93,7 @@ describe('user route', function () {
                 }
             };
             server.inject(options, function (response) {
-                expect(response.statusCode).to.equal(404);
+                expect(response.statusCode).to.equal(401);
                 done();
             });
         });
