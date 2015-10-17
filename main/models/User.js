@@ -38,11 +38,26 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true,
         indexes: [{
             name: 'user_auth_token',
+            method: 'BTREE',
             fields: ['auth_token']
         }, {
             name: 'user_email',
+            method: 'BTREE',
             fields: ['email']
         }],
+        classMethods: {
+            authenticate: function (email, password, callback) {
+                this.findOne({where: {email: email}}).then(function (foundUser) {
+                    if (!foundUser || foundUser === null) {
+                        callback(false);
+                    } else {
+                        var bcrypt = require('bcrypt-nodejs');
+                        var authenticated = bcrypt.compareSync(password, foundUser.password);
+                        callback(authenticated, foundUser.authToken);
+                    }
+                });
+            }
+        },
         hooks: {
             beforeCreate: function (user, options) {
                 var uuid = require('node-uuid');

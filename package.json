@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=development ./node_modules/nodemon/bin/nodemon.js",
-    "test": "NODE_ENV=test istanbul cover --include-all-sources _mocha -- --colors --growl --full-trace test/**/* -R spec",
+    "test": "NODE_ENV=test istanbul cover --include-all-sources _mocha -- --colors --growl --full-trace test/**/*.spec.js -R spec",
     "test_routes": "NODE_ENV=test istanbul cover --include-all-sources _mocha -- --colors --growl --full-trace test/routes -R spec",
     "test_models": "NODE_ENV=test istanbul cover --include-all-sources _mocha -- --colors --growl --full-trace test/models -R spec",
     "test_controllers": "NODE_ENV=test istanbul cover --include-all-sources _mocha -- --colors --growl --full-trace test/controllers -R spec"
