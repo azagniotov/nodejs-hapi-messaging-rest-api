@@ -31,7 +31,7 @@ The API allows to perform the following operations :
 * [HTTP Verbs](#http-verbs)
 * [Authentication](#authentication)
 * [Resources](#resources)
-* [Design Decisions & Assumptions](#design-decisions-assumptions)
+* [Design Decisions and Assumptions](#design-decisions-and-assumptions)
 * [Future Enhancements](#future-enhancements)
 
 ### Running
@@ -495,7 +495,7 @@ Response
 ```
 
 
-### Design Decisions & Assumptions
+### Design Decisions and Assumptions
 
 1. Client requests submitted to the API are valid, ie.: there is no email format or password complexity validation in place
 2. After creation, `User` cannot be updated
