@@ -34,20 +34,10 @@ describe('sessions controller', function () {
         var password = "987654321";
 
         beforeEach(function (done) {
-            var options = {
-                method: "POST",
-                url: "/api/v1/users",
-                headers: {
-                    "content-type": "application/json"
-                },
-                payload: {
-                    "user": {"email": email, "password": password, "name": "alex-wow"}
-                }
-            };
-            server.inject(options, function (response) {
-                expect(response.statusCode).to.equal(201);
-                done();
-            });
+            User.create({name: 'alex-wow', email: email, password: password})
+                .then(function (user) {
+                    done();
+                });
         });
 
 

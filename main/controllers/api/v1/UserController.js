@@ -37,11 +37,21 @@ UserController.prototype = {
                     reply(userSerializer.serialize(user.get({plain: true}))).code(200);
                 }
             });
-
         });
     },
     listAllUsers: function listAllUsers(request, reply) {
 
+        controllerUtils.apiKeyAuthorize(request, reply, function () {
+
+            User.findAll().then(function (users) {
+                var plainUsers = [];
+                users.forEach(function (user) {
+                    plainUsers.push(user.get({plain: true}));
+                });
+                reply(userSerializer.serialize(plainUsers)).code(200);
+            });
+
+        });
     }
 };
 

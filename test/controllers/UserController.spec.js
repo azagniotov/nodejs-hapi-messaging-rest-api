@@ -169,36 +169,12 @@ describe('user controller', function () {
         var createUserId;
         var authToken;
         beforeEach(function (done) {
-            var options = {
-                method: "POST",
-                url: "/api/v1/users",
-                headers: {
-                    "content-type": "application/json"
-                },
-                payload: {
-                    "user": {"email": "1@gmail.com", "password": "987654321", "name": "alex-wow"}
-                }
-            };
-
-            server.inject(options, function (response) {
-                var payload = JSON.parse(response.payload);
-                expect(response.statusCode).to.equal(201);
-                createUserId = payload.data.id;
-
-                var get_token_options = {
-                    method: "GET",
-                    url: "/api/v1/sessions",
-                    headers: {
-                        authorization: 'Basic ' + (new Buffer('1@gmail.com:987654321', 'utf8')).toString('base64')
-                    }
-                };
-                server.inject(get_token_options, function (response) {
-                    var payload = JSON.parse(response.payload);
-                    expect(response.statusCode).to.equal(200);
-                    authToken = payload.auth_token;
+            User.create({name: 'alex-wow', email: '1@gmail.com', password: '987654321'})
+                .then(function (user) {
+                    createUserId = user.id;
+                    authToken = user.authToken;
                     done();
                 });
-            });
         });
 
         it("should list user by id", function (done) {
@@ -299,6 +275,95 @@ describe('user controller', function () {
                 expect(error.code).to.equal(422);
                 expect(error.message).to.equal('422 Unprocessable Entity');
                 expect(error.description).to.contain('"user_id" with value "abc" fails to match the required pattern');
+
+                done();
+            });
+        });
+    });
+
+    describe('listAllUsers', function () {
+
+        var userOneAuthToken;
+        beforeEach(function (done) {
+            User.bulkCreate([
+                {name: 'Alex1', email: 'alex1@gmail.com', password: '123456'},
+                {name: 'Alex2', email: 'alex2@gmail.com', password: '654321'}
+            ]).then(function (users) {
+                userOneAuthToken = users[0].get({plain: true}).auth_token;
+                done();
+            });
+        });
+
+        it("should list all users", function (done) {
+            var get_options = {
+                method: "GET",
+                url: "/api/v1/users",
+                headers: {
+                    "content-type": "application/json",
+                    "x-api-key": userOneAuthToken
+                }
+            };
+
+            server.inject(get_options, function (response) {
+                expect(response.statusCode).to.equal(200);
+                var payload = JSON.parse(response.payload);
+
+                expect(payload).to.have.property('data').with.length(2);
+
+                expect(payload.data[0]).to.have.property('type').equal('users');
+                expect(payload.data[1]).to.have.property('type').equal('users');
+
+                expect(payload.data[0]).to.have.property('attributes').that.is
+                    .an('object').eql({
+                        'name': 'Alex1',
+                        'email': 'alex1@gmail.com'
+                    });
+                expect(payload.data[1]).to.have.property('attributes').that.is
+                    .an('object').eql({
+                        'name': 'Alex2',
+                        'email': 'alex2@gmail.com'
+                    });
+
+                done();
+            });
+        });
+
+        it("should return 401 when trying to list all users with invalid auth token", function (done) {
+            var get_options = {
+                method: "GET",
+                url: "/api/v1/users",
+                headers: {
+                    "content-type": "application/json",
+                    "x-api-key": "invalid_token_value"
+                }
+            };
+            server.inject(get_options, function (response) {
+                expect(response.statusCode).to.equal(401);
+
+                var error = JSON.parse(response.payload);
+                expect(error.code).to.equal(401);
+                expect(error.message).to.equal('401 Unauthorized');
+                expect(error.description).to.equal('Api key is not valid');
+
+                done();
+            });
+        });
+
+        it("should return 401 when trying to list all users without auth token header", function (done) {
+            var get_options = {
+                method: "GET",
+                url: "/api/v1/users",
+                headers: {
+                    "content-type": "application/json"
+                }
+            };
+            server.inject(get_options, function (response) {
+                expect(response.statusCode).to.equal(401);
+
+                var error = JSON.parse(response.payload);
+                expect(error.code).to.equal(401);
+                expect(error.message).to.equal('401 Unauthorized');
+                expect(error.description).to.equal('X-Api-Key header is not set');
 
                 done();
             });

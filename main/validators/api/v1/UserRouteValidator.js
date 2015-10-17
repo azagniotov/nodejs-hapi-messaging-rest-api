@@ -34,9 +34,9 @@ UserRouteValidator.prototype = {
     },
     validateListAllUsers: function validateListAllUsers() {
         return {
-            params: {
-                id: Joi.string().regex(/^[0-9]{1,1}$/)
-            }
+            headers: Joi.object({
+                'content-type': Joi.string().required().valid('application/json')
+            }).unknown()
         };
     }
 };

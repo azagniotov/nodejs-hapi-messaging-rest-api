@@ -51,6 +51,15 @@ module.exports = function (sequelize, DataTypes) {
                 var bcrypt = require('bcrypt-nodejs');
                 user.salt = bcrypt.genSaltSync(10);
                 user.password = bcrypt.hashSync(user.password, user.salt);
+            },
+            beforeBulkCreate: function (users) {
+                var uuid = require('node-uuid');
+                var bcrypt = require('bcrypt-nodejs');
+                users.forEach(function (user) {
+                    user.authToken = uuid.v4().replace(/-/g, '');
+                    user.salt = bcrypt.genSaltSync(10);
+                    user.password = bcrypt.hashSync(user.password, user.salt);
+                });
             }
         }
     });
