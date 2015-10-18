@@ -16,30 +16,23 @@ describe('sessions controller', function () {
         });
     });
 
-    afterEach(function (done) {
-        User.destroy({truncate: true, force: true}).then(function () {
-            done();
-        });
-    });
-
-    after(function (done) {
-        User.sync({force: true}).then(function () {
-            done();
-        });
-    });
-
     describe('authenticateUserWithBasic', function () {
 
         var email = "something@yahoo.com";
         var password = "987654321";
 
-        beforeEach(function (done) {
+        before(function (done) {
             User.create({name: 'alex-wow', email: email, password: password})
                 .then(function (user) {
                     done();
                 });
         });
 
+        after(function (done) {
+            User.sync({force: true}).then(function () {
+                done();
+            });
+        });
 
         it("should authenticate user when Basic header is set", function (done) {
             var options = {

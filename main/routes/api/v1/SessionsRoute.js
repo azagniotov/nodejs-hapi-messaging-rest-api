@@ -4,7 +4,7 @@ var authenticateUserWithBasic = {
     path: '/api/v1/sessions',
     method: 'GET',
     config: {
-        id: 'authenticate_user_with_basic',
+        id: 'get_authorization_token_using_basic_auth',
         description: 'Authenticate user with Basic Authentication',
         handler: sessionsController.authenticateUserWithBasic,
         auth: 'simple'

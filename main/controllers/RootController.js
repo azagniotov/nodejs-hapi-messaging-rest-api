@@ -5,17 +5,18 @@ function RootController() {
 RootController.prototype = {
     apiDiscovery: function apiDiscovery(request, reply) {
 
-        var idx,
+        var server = require(__main_root + 'server/Server').listen(),
+            idx,
             route,
             apiVersion,
             chunks,
             resource,
             endpoint,
-            routingTable = module.parent.parent.exports.routingTable,
             discoveredApi = {};
-        for (idx = 0; idx < routingTable.length; idx++) {
-            route = routingTable[idx];
-            if (route.settings.id !== 'root') {
+
+        for (idx = 0; idx < server.table()[0].table.length; idx++) {
+            route = server.table()[0].table[idx];
+            if (route.path !== '/') {
                 chunks = route.path.split('/');
                 apiVersion = chunks[2].replace('v', '');
                 resource = chunks[3];

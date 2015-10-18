@@ -9,7 +9,7 @@ describe('sessions route', function () {
         db.instance.sync().then(function () {
             server = require(__main_root + 'server/Server').listen();
             server.start(function () {
-                route = server.lookup('authenticate_user_with_basic');
+                route = server.lookup('get_authorization_token_using_basic_auth');
                 done();
             });
         });

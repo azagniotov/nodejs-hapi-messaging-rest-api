@@ -284,7 +284,7 @@ describe('user controller', function () {
     describe('listAllUsers', function () {
 
         var userOneAuthToken;
-        beforeEach(function (done) {
+        before(function (done) {
             User.bulkCreate([
                 {name: 'Alex1', email: 'alex1@gmail.com', password: '123456'},
                 {name: 'Alex2', email: 'alex2@gmail.com', password: '654321'}
