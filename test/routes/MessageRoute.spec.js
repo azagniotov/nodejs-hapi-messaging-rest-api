@@ -2,28 +2,31 @@ var expect = require('../test_helper').expect;
 var assert = require('../test_helper').assert;
 
 /* istanbul ignore next */
-describe('sessions route', function () {
+describe('message route', function () {
 
-    var server, route;
+    var server;
     before(function (done) {
         var db = require(__main_root + 'db/DB.js');
         db.instance.sync().then(function () {
             server = require(__main_root + 'server/Server').listen();
-            server.start(function () {
-                route = server.lookup('get_authorization_token_using_basic_auth');
-                done();
-            });
+            done();
         });
     });
 
-    describe('get authorization token using basic auth route', function () {
+    describe('list message by id route', function () {
+        var route;
+        before(function (done) {
+            route = server.lookup('list_message_by_id');
+            done();
+        });
+
         it("should not be null", function (done) {
             expect(route).to.not.be.null;
             done();
         });
 
         it("should have expected path", function (done) {
-            expect(route.path).to.equal('/api/v1/sessions');
+            expect(route.path).to.equal('/api/v1/messages/{message_id}');
             done();
         });
 
@@ -33,13 +36,13 @@ describe('sessions route', function () {
         });
 
         it("should have expected description", function (done) {
-            expect(route.settings.description).to.equal('Authenticate user with Basic Authentication');
+            expect(route.settings.description).to.equal('List message by id');
             done();
         });
 
         it("should have expected handler function", function (done) {
             assert.isFunction(route.settings.handler);
-            expect(route.settings.handler.name).to.equal('authenticateUserWithBasic');
+            expect(route.settings.handler.name).to.equal('listMessageById');
             done();
         });
     });

@@ -1,8 +1,9 @@
 function listen() {
     var Hapi = require('hapi');
     var rootRoute = require(__main_root + 'routes/RootRoute.js');
-    var userRoutes = require(__main_root + 'routes/api/v1/UserRoute.js');
     var sessionsRoute = require(__main_root + 'routes/api/v1/SessionsRoute.js');
+    var userRoutes = require(__main_root + 'routes/api/v1/UserRoute.js');
+    var messageRoutes = require(__main_root + 'routes/api/v1/MessageRoute.js');
 
     var server = new Hapi.Server();
     server.connection({
@@ -10,7 +11,7 @@ function listen() {
         port: process.env.npm_package_config_port
     });
 
-    server.route([rootRoute].concat(userRoutes));
+    server.route([rootRoute].concat(userRoutes, messageRoutes));
     module.exports.routingTable = server.table(process.env.npm_package_config_host)[0].table;
 
     server.ext('onPreResponse', function (request, reply) {

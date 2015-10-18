@@ -24,6 +24,10 @@ UserRouteValidator.prototype = {
     },
     validateListUserById: function validateListUserById() {
         return {
+            headers: Joi.object({
+                'content-type': Joi.string().required().valid('application/json')
+            }).unknown(),
+            
             params: {
                 user_id: Joi.string().regex(/^[0-9]{1,}$/)
             },
