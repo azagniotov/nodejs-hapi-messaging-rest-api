@@ -49,11 +49,11 @@ module.exports = function (sequelize, DataTypes) {
             authenticate: function (email, password, callback) {
                 this.findOne({where: {email: email}}).then(function (foundUser) {
                     if (!foundUser || foundUser === null) {
-                        callback(false);
+                        callback(false, null);
                     } else {
                         var bcrypt = require('bcrypt-nodejs');
                         var authenticated = bcrypt.compareSync(password, foundUser.password);
-                        callback(authenticated, foundUser.authToken);
+                        callback(authenticated, (authenticated === false ? null : foundUser.authToken));
                     }
                 });
             }

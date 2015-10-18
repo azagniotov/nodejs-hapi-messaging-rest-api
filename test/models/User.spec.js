@@ -24,7 +24,7 @@ describe('user model', function () {
         }).then(function (user) {
             expect(user.name).to.equal('Alex');
             expect(user.email).to.equal('alex@gmail.com');
-            expect(user.salt).to.not.be.null;
+            expect(user.salt).to.not.equal(null);
             expect(user.password).to.contain(user.salt);
             done();
         })
@@ -40,24 +40,6 @@ describe('user model', function () {
             expect(error.errors[0].message).to.equal('email must be unique');
             done();
         });
-    });
-
-    it('should authenticate user', function (done) {
-        var rawPassword = '123456';
-        User.create({
-            name: 'Alex',
-            email: 'alex@gmail.com',
-            password: rawPassword
-        }).then(function (savedUser) {
-            User.findOne({where: {email: savedUser.email}}).then(function (foundUser) {
-                var bcrypt = require('bcrypt-nodejs');
-                var authenticated = bcrypt.compareSync(rawPassword, foundUser.password);
-
-                expect(authenticated).to.be.true;
-
-                done();
-            });
-        })
     });
 
     it('should generate auth_token before creating new user', function (done) {
@@ -102,5 +84,51 @@ describe('user model', function () {
             expect(error.message).to.equal('notNull Violation: email cannot be null');
             done();
         })
+    });
+
+    describe('authentication', function () {
+        var email = 'alex@gmail.com';
+        var password = '123456';
+        var savedUserAuthToken;
+        before(function (done) {
+            User.create({
+                name: 'Alex',
+                email: 'alex@gmail.com',
+                password: password
+            }).then(function (savedUser) {
+                savedUserAuthToken = savedUser.authToken;
+                done();
+            })
+        });
+
+        after(function (done) {
+            User.sync({force: true}).then(function () {
+                done();
+            });
+        });
+
+        it('should authenticate user when valid credentials are provided', function (done) {
+            User.authenticate(email, password, function (isAuthenticated, authToken) {
+                expect(isAuthenticated).to.equal(true);
+                expect(authToken).to.equal(savedUserAuthToken);
+                done();
+            });
+        });
+
+        it('should not authenticate user when invalid email is provided', function (done) {
+            User.authenticate('invalid@email.com', password, function (isAuthenticated, authToken) {
+                expect(isAuthenticated).to.equal(false);
+                expect(authToken).to.equal(null);
+                done();
+            });
+        });
+
+        it('should not authenticate user when invalid password is provided', function (done) {
+            User.authenticate(email, '11111111111', function (isAuthenticated, authToken) {
+                expect(isAuthenticated).to.equal(false);
+                expect(authToken).to.equal(null);
+                done();
+            });
+        });
     });
 });
