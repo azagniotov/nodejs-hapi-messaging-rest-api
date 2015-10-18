@@ -11,7 +11,8 @@ MessageSerializer.prototype = {
                     return '/api/v1/messages/' + message.id
                 }
             },
-            attributes: ['sender_id', 'text', 'created_at']
+            keyForAttribute: 'underscore_case',
+            attributes: ['senderId', 'text', 'created_at']
         });
     }
 };
