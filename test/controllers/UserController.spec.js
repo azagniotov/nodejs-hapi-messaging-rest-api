@@ -16,12 +16,6 @@ describe('user controller', function () {
         });
     });
 
-    afterEach(function (done) {
-        User.destroy({truncate: true, force: true}).then(function () {
-            done();
-        });
-    });
-
     after(function (done) {
         User.sync({force: true}).then(function () {
             done();
@@ -29,6 +23,13 @@ describe('user controller', function () {
     });
 
     describe('createNewUser', function () {
+
+        afterEach(function (done) {
+            User.destroy({truncate: true, force: true}).then(function () {
+                done();
+            });
+        });
+
 
         it("should fail to create new user when POSTed invalid JSON", function (done) {
             var options = {
@@ -168,7 +169,7 @@ describe('user controller', function () {
 
         var createUserId;
         var authToken;
-        beforeEach(function (done) {
+        before(function (done) {
             User.create({name: 'alex-wow', email: '1@gmail.com', password: '987654321'})
                 .then(function (user) {
                     createUserId = user.id;
@@ -177,6 +178,12 @@ describe('user controller', function () {
                 });
         });
 
+        after(function (done) {
+            User.destroy({truncate: true, force: true}).then(function () {
+                done();
+            });
+        });
+        
         it("should list user by id", function (done) {
             var get_options = {
                 method: "GET",
