@@ -1,4 +1,3 @@
-var Joi = require('joi');
 var validatorUtils = require(__main_root + 'validators/api/v1/ValidatorUtils.js');
 
 function MessageRouteValidator() {

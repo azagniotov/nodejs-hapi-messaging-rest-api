@@ -20,7 +20,7 @@ ValidatorUtils.prototype = {
             'content-type': Joi.string().required().valid(contentType)
         }).unknown();
     },
-    enforceNumericValue: function enforceHeaderContentType(contentType) {
+    enforceNumericValue: function enforceNumericValue() {
         return Joi.string().regex(/^[0-9]{1,}$/);
     }
 };

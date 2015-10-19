@@ -14,7 +14,7 @@ UserController.prototype = {
             password: payload.user.password
         }).then(function (user) {
             reply(userSerializer.serialize(user.get({plain: true}))).code(201);
-        }).catch(function (error) {
+        }).catch(function () {
             reply({
                 'code': 409,
                 'message': '409 Conflict',

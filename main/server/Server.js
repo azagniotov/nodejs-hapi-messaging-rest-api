@@ -26,7 +26,7 @@ function listen() {
         return reply.continue();
     });
 
-    server.register(require('hapi-auth-basic'), function (error) {
+    server.register(require('hapi-auth-basic'), function () {
         server.auth.strategy('simple', 'basic', {
             validateFunc: function (request, email, password, callback) {
                 var User = require(__main_root + 'db/DB.js').models.user;
