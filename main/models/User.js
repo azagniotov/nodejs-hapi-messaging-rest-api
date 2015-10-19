@@ -59,7 +59,7 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         hooks: {
-            beforeCreate: function (user, options) {
+            beforeCreate: function (user) {
                 var uuid = require('node-uuid');
                 user.authToken = uuid.v4().replace(/-/g, '');
 
