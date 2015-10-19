@@ -1,4 +1,6 @@
 var expect = require('../test_helper').expect;
+var drop = require('../test_helper').drop;
+var truncate = require('../test_helper').truncate;
 
 /* istanbul ignore next */
 describe('user controller', function () {
@@ -17,19 +19,14 @@ describe('user controller', function () {
     });
 
     after(function (done) {
-        User.sync({force: true}).then(function () {
-            done();
-        });
+        drop(User, done);
     });
 
     describe('createNewUser', function () {
 
         afterEach(function (done) {
-            User.destroy({truncate: true, force: true}).then(function () {
-                done();
-            });
+            truncate(User, done);
         });
-
 
         it("should fail to create new user when POSTed invalid JSON", function (done) {
             var options = {
@@ -179,11 +176,9 @@ describe('user controller', function () {
         });
 
         after(function (done) {
-            User.destroy({truncate: true, force: true}).then(function () {
-                done();
-            });
+            truncate(User, done);
         });
-        
+
         it("should list user by id", function (done) {
             var get_options = {
                 method: "GET",

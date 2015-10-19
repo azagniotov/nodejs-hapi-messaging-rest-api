@@ -1,19 +1,16 @@
 var expect = require('../test_helper').expect;
+var drop = require('../test_helper').drop;
 
 /* istanbul ignore next */
 describe('message model', function () {
     var Message = require(__main_root + 'db/DB.js').models.message;
 
     before(function (done) {
-        Message.sync({force: true}).then(function () {
-            done();
-        });
+        drop(Message, done);
     });
 
     afterEach(function (done) {
-        Message.sync({force: true}).then(function () {
-            done();
-        });
+        drop(Message, done);
     });
 
     it('should save new message to DB when all required properties are set', function (done) {

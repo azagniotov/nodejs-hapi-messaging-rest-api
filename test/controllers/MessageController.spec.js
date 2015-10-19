@@ -1,4 +1,5 @@
 var expect = require('../test_helper').expect;
+var drop = require('../test_helper').drop;
 
 /* istanbul ignore next */
 describe('message controller', function () {
@@ -35,11 +36,8 @@ describe('message controller', function () {
         });
 
         after(function (done) {
-            Message.sync({force: true}).then(function () {
-                User.sync({force: true}).then(function () {
-                    done();
-                });
-            });
+            drop(Message, null);
+            drop(User, done);
         });
 
         it("should list message by id", function (done) {

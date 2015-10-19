@@ -1,4 +1,5 @@
 var expect = require('../test_helper').expect;
+var drop = require('../test_helper').drop;
 
 /* istanbul ignore next */
 describe('sessions controller', function () {
@@ -29,9 +30,7 @@ describe('sessions controller', function () {
         });
 
         after(function (done) {
-            User.sync({force: true}).then(function () {
-                done();
-            });
+            drop(User, done);
         });
 
         it("should authenticate user when Basic header is set", function (done) {

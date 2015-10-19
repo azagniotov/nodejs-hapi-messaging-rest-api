@@ -1,19 +1,16 @@
 var expect = require('../test_helper').expect;
+var drop = require('../test_helper').drop;
 
 /* istanbul ignore next */
 describe('user model', function () {
     var User = require(__main_root + 'db/DB.js').models.user;
 
     before(function (done) {
-        User.sync({force: true}).then(function () {
-            done();
-        });
+        drop(User, done);
     });
 
     afterEach(function (done) {
-        User.sync({force: true}).then(function () {
-            done();
-        });
+        drop(User, done);
     });
 
     it('should save new user to DB when all required properties are set', function (done) {
@@ -102,9 +99,7 @@ describe('user model', function () {
         });
 
         after(function (done) {
-            User.sync({force: true}).then(function () {
-                done();
-            });
+            drop(User, done);
         });
 
         it('should authenticate user when valid credentials are provided', function (done) {
