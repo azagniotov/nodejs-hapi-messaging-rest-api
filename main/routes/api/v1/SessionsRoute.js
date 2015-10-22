@@ -1,4 +1,4 @@
-var sessionsController = require(__main_root + 'controllers/api/v1/SessionsController.js');
+var sessionsController = require(global.__main_root + 'controllers/api/v1/SessionsController.js');
 
 var authenticateUserWithBasic = {
     path: '/api/v1/sessions',

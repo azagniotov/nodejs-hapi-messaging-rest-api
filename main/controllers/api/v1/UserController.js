@@ -1,6 +1,6 @@
-var userSerializer = require(__main_root + 'serializers/UserSerializer.js');
-var controllerUtils = require(__main_root + 'controllers/api/v1/ControllerUtils.js');
-var User = require(__main_root + 'db/DB.js').models.user;
+var userSerializer = require(global.__main_root + 'serializers/UserSerializer.js');
+var controllerUtils = require(global.__main_root + 'controllers/api/v1/ControllerUtils.js');
+var User = require(global.__main_root + 'db/DB.js').models.user;
 
 function UserController() {
 }

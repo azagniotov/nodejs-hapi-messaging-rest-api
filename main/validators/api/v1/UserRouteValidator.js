@@ -1,5 +1,5 @@
 var Joi = require('joi');
-var validatorUtils = require(__main_root + 'validators/api/v1/ValidatorUtils.js');
+var validatorUtils = require(global.__main_root + 'validators/api/v1/ValidatorUtils.js');
 
 function UserRouteValidator() {
 }
@@ -7,7 +7,7 @@ function UserRouteValidator() {
 UserRouteValidator.prototype = {
     validateCreateNewUser: function validateCreateNewUser() {
         return {
-            headers: validatorUtils.enforceHeaderContentType('application/json'),
+            headers: validatorUtils.enforceHeaderContentTypeJson(),
             payload: {
                 user: Joi.object().required().keys({
                     'name': Joi.string().required(),
@@ -22,7 +22,7 @@ UserRouteValidator.prototype = {
     },
     validateListUserById: function validateListUserById() {
         return {
-            headers: validatorUtils.enforceHeaderContentType('application/json'),
+            headers: validatorUtils.enforceHeaderContentTypeJson(),
             params: {user_id: validatorUtils.enforceNumericValue()},
             failAction: function (request, reply, source, error) {
                 return validatorUtils.handleError(reply, error);
@@ -30,7 +30,7 @@ UserRouteValidator.prototype = {
         };
     },
     validateListAllUsers: function validateListAllUsers() {
-        return {headers: validatorUtils.enforceHeaderContentType('application/json')};
+        return {headers: validatorUtils.enforceHeaderContentTypeJson()};
     }
 };
 

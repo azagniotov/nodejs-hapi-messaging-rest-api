@@ -1,5 +1,5 @@
-var userController = require(__main_root + 'controllers/api/v1/UserController.js');
-var userRouteValidator = require(__main_root + 'validators/api/v1/UserRouteValidator.js');
+var userController = require(global.__main_root + 'controllers/api/v1/UserController.js');
+var userRouteValidator = require(global.__main_root + 'validators/api/v1/UserRouteValidator.js');
 
 var createNewUser = {
     path: '/api/v1/users',

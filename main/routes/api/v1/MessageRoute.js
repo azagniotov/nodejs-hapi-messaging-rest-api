@@ -1,5 +1,5 @@
-var messageController = require(__main_root + 'controllers/api/v1/MessageController.js');
-var messageRouteValidator = require(__main_root + 'validators/api/v1/MessageRouteValidator.js');
+var messageController = require(global.__main_root + 'controllers/api/v1/MessageController.js');
+var messageRouteValidator = require(global.__main_root + 'validators/api/v1/MessageRouteValidator.js');
 
 var listMessageById = {
     path: '/api/v1/messages/{message_id}',

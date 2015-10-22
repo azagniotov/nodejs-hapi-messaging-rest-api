@@ -15,13 +15,13 @@ ValidatorUtils.prototype = {
             return reply(error);
         }
     },
-    enforceHeaderContentType: function enforceHeaderContentType(contentType) {
+    enforceHeaderContentTypeJson: function enforceHeaderContentTypeJson() {
         return Joi.object({
-            'content-type': Joi.string().required().valid(contentType)
+            'content-type': Joi.string().required().valid('application/json')
         }).unknown();
     },
     enforceNumericValue: function enforceNumericValue() {
-        return Joi.string().regex(/^[0-9]{1,}$/);
+        return Joi.string().required().regex(/^[0-9]{1,}$/);
     }
 };
 
