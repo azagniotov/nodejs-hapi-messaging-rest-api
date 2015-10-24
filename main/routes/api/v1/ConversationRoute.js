@@ -6,7 +6,7 @@ var createNewConversation = {
     method: 'POST',
     config: {
         id: 'create_new_conversation',
-        description: 'Create new conversation',
+        description: 'Creates new conversation',
         handler: conversationController.createNewConversation,
         validate: conversationRouteValidator.createNewConversation()
     }
